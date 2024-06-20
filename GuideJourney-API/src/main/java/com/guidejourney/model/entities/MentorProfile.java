@@ -1,16 +1,16 @@
 package com.guidejourney.model.entities;
 
-
-import jakarta.persistence.*;
 import java.util.List;
+
 import com.guidejourney.model.enums.Country;
 import com.guidejourney.model.enums.InterestArea;
 
+import jakarta.persistence.*;
 import lombok.Data;
 
 @Entity
 @Data
-public class StudentProfile {
+public class MentorProfile {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -29,13 +29,18 @@ public class StudentProfile {
     @Enumerated(EnumType.STRING)
     private Country country;
 
-    private String companyOrSchool;
+    private String company;
+
+    private int yearsOfExperience;
 
     @Lob
     @Column(name = "biography", columnDefinition = "TEXT")
     private String biography;
 
+    private String linkedinLink; 
+
+
     @ElementCollection
     @Enumerated(EnumType.STRING)
-    private List<InterestArea> interestAreas;
+    private List<InterestArea> interestAreas; 
 }
