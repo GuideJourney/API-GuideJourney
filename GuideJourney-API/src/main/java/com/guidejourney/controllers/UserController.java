@@ -23,13 +23,13 @@ public class UserController {
     private UserMapper userMapper;
 
     @PostMapping("/register")
-    public ResponseEntity<UserResponseDto> registerUser(@Valid @RequestBody UserRegistrationDto userDto) {
+    public ResponseEntity<UserResponseDto> registerUser(@Valid @RequestBody UserRegistrationDto userDto, @RequestParam String roleName) {
         if (!userDto.getPassword().equals(userDto.getConfirmPassword())) {
             throw new PasswordsDoNotMatchException("Las contraseñas no coinciden");
         }
 
         User user = userMapper.toEntity(userDto);
-        User registeredUser = userService.registerNewUser(user);
+        User registeredUser = userService.registerNewUser(user, roleName);
         UserResponseDto responseDto = userMapper.toDto(registeredUser);
         return ResponseEntity.ok(responseDto);
     }

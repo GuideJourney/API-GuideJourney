@@ -20,4 +20,8 @@ public class User {
     @NotBlank
     @Size(min = 8)
     private String password;
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "role_id")
+    private Role role;
 }
